@@ -1,17 +1,18 @@
 {
   "name": "mango-mongo",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "server.js",
   "scripts": {
     "build": "rm -rf dist/ ; tsc && mkdir -p dist/ && rsync -r --exclude=*.ts src/ dist",
-    "clean": " && mkdir -p dist/"
+    "clean": " && mkdir -p dist/",
+    "start": "npm run build && node dist/src/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gowthamrodda/mango-mongo.git"
   },
-  "author": "",
+  "author": "Gowtham Kumar Rodda",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gowthamrodda/mango-mongo/issues"
