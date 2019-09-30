@@ -5,12 +5,16 @@ let app = express();
 let port = 2000;
 let url = 'mongodb://localhost/emp';
 
-let connection = mongo.connect(url,{useNewUrlParser: true,useUnifiedTopology: true}).then(() => { 
-    console.log('connected to MongoDB');
-},
-).catch(err => {
-    console.log("MongoDB connection error." + err);
-});
+let con = async function connect(url : any ) {
+    if(url) {
+    return mongo.connect(url, {useNewUrlParser: true,useUnifiedTopology: true});
+    }
+    }
+    async function disconnect(con : any ) {
+     await con.close();
+    }
 
-export {connection}
+    export {con, disconnect};
+    
+    
 
