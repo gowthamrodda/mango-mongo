@@ -1,18 +1,27 @@
+import cookieParser from 'cookie-parser';
 import express, { Express } from 'express';
-import { Request, Response } from 'express';
 import * as http from 'http';
-import { Http2Server } from 'http2';
+import createError from 'http-errors';
 
 class Server {
   private app: Express;
   private server: any;
-  private port: number;
 
   constructor() {
     this.app = express();
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: false }));
-    this.app.use(cookieParser());
-    this.server = http.createServer(this.app);
+    this.app.get('/', (req, res, next) => {
+      res.send({
+        msg: 'Hello World',
+      });
+    });
+  }
+
+  public start(port: number = 3000) {
+
+    this.app.set('port', port);
+    this.app.listen(port, () => console.log('app listening on', port));
+
   }
 }
+
+new Server().start(4000);
