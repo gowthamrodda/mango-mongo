@@ -1,11 +1,18 @@
-import express from 'express';
-import {Request,Response} from 'express';
-let app = express();
-let port = 2000;
+import express, { Express } from 'express';
+import { Request, Response } from 'express';
+import * as http from 'http';
+import { Http2Server } from 'http2';
 
-app.get('/',(req: Request,res: Response) => {
-    res.send(`App Listening on port : ${port}`);
-    
-})
+class Server {
+  private app: Express;
+  private server: any;
+  private port: number;
 
-app.listen(port);
+  constructor() {
+    this.app = express();
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(cookieParser());
+    this.server = http.createServer(this.app);
+  }
+}
